@@ -3,12 +3,14 @@ package day5.tdd;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 // ★最終的なゴール
@@ -52,6 +54,22 @@ class PotterBooksCalculatorTest {
       List<Integer> books = List.of(volume);
       double actual = calculator.calculateTotalPrice(books);
       assertThat(actual, is(BOOK_PRICE));
+    }
+    
+    @DisplayName("複数冊を同一巻で購入した場合のテスト")
+    @ParameterizedTest(name = "ケース{index} {0}巻を{1}冊購入したら{2}ユーロになること")
+    @CsvSource({
+        "1, 2, 16.0",
+        "2, 3, 24.0",
+        "5, 4, 32.0"
+    })
+    void purchaseMultipleSameBooksTest(int volume, int quantity, double expectedPrice) {
+        List<Integer> books = new ArrayList<>();
+        for (int i = 0; i < quantity; i++) {
+            books.add(volume);
+        }
+        double actual = calculator.calculateTotalPrice(books);
+        assertThat(actual, is(expectedPrice));
     }
   }
 
