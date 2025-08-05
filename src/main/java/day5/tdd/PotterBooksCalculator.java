@@ -15,6 +15,9 @@ public class PotterBooksCalculator {
    * @return 計算された合計金額
    */
   public double calculateTotalPrice(List<Integer> books) {
+	if (books == null || books.isEmpty()) {
+	  throw new IllegalArgumentException("カートに何も入っていません。");
+	}
     int firstBookVolume = books.get(0);
     boolean isAllSameVolume =
         books.stream().allMatch(bookVolume -> Objects.equals(bookVolume, firstBookVolume));
