@@ -104,7 +104,11 @@ class PotterBooksCalculatorTest {
         // 異なる巻4冊 (20%オフ)
         arguments(Arrays.asList(1, 2, 3, 4), BOOK_PRICE * 4 * 0.80),
         arguments(Arrays.asList(2, 1, 3, 4), BOOK_PRICE * 4 * 0.80), // (順序が異なっても結果は同じはず)
-        arguments(Arrays.asList(3, 3, 3, 1), BOOK_PRICE * 4 * 0.80)
+        arguments(Arrays.asList(3, 3, 3, 1), BOOK_PRICE * 4 * 0.80),
+        // 異なる巻5冊 (25%オフ)
+        arguments(Arrays.asList(1, 2, 3, 4, 5), BOOK_PRICE * 5 * 0.75),
+        arguments(Arrays.asList(2, 1, 3, 4, 5), BOOK_PRICE * 5 * 0.75), // (順序が異なっても結果は同じはず)
+        arguments(Arrays.asList(3, 3, 3, 1, 1), BOOK_PRICE * 5 * 0.75)
       );
     }
   }
