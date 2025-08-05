@@ -21,6 +21,9 @@ public class PotterBooksCalculator {
     if (isAllSameVolume) {
       return books.size() * BOOK_PRICE;
     }
+    if (!isAllSameVolume && books.size() == 2) {
+      return books.size() * BOOK_PRICE * 0.95;
+    }
     return 0.0; // とりあえず0を返すようにしておく
   }
 }
