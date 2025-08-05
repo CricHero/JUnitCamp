@@ -15,9 +15,6 @@ public class PotterBooksCalculator {
    * @return 計算された合計金額
    */
   public double calculateTotalPrice(List<Integer> books) {
-	if (books.size() == 1) {
-	  return BOOK_PRICE;
-	}
     int firstBookVolume = books.get(0);
     boolean isAllSameVolume =
         books.stream().allMatch(bookVolume -> Objects.equals(bookVolume, firstBookVolume));
