@@ -2,15 +2,20 @@ package day5.tdd;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
+import static org.junit.jupiter.params.provider.Arguments.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 // ★最終的なゴール
@@ -72,5 +77,26 @@ class PotterBooksCalculatorTest {
         assertThat(actual, is(expectedPrice));
     }
   }
+  
+  @Nested
+  @DisplayName("パターン2：異なる巻を購入した場合のテスト")
+  class PurchaseDifferentBooksTest {
 
+    @DisplayName("異なる巻の組み合わせと割引率が正しいことを確かめるテスト")
+    @ParameterizedTest(name = "ケース{index} {0}巻の組み合わせで購入したら{1}ユーロになること")
+    @MethodSource("differenBooksProvider")
+    void purchaseDifferentBooksTest(List<Integer> books, double expectedPrice) {
+      double actual = calculator.calculateTotalPrice(books);
+      assertThat(actual, is(expectedPrice));
+    }
+
+    static Stream<Arguments> differenBooksProvider() {
+      return Stream.of(
+    	// 異なる巻2冊 (5%オフ)
+        arguments(Arrays.asList(1, 2), 15.2),
+        arguments(Arrays.asList(2, 1), 15.2), // (順序が異なっても結果は同じはず)
+        arguments(Arrays.asList(3, 5), 15.2)
+      );
+    }
+  }
 }
