@@ -1,6 +1,7 @@
 package day5.tdd;
 
 import java.util.List;
+import java.util.Objects;
 
 public class PotterBooksCalculator {
   // 基本的な書籍の価格（1冊あたり）
@@ -17,6 +18,12 @@ public class PotterBooksCalculator {
 	if (books.size() == 1) {
 	  return BOOK_PRICE;
 	}
+    int firstBookVolume = books.get(0);
+    boolean isAllSameVolume =
+        books.stream().allMatch(bookVolume -> Objects.equals(bookVolume, firstBookVolume));
+    if (isAllSameVolume) {
+      return books.size() * BOOK_PRICE;
+    }
     return 0.0; // とりあえず0を返すようにしておく
   }
 }
