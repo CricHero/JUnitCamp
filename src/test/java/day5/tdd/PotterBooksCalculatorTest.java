@@ -2,6 +2,7 @@ package day5.tdd;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.*;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 // ★最終的なゴール
@@ -114,6 +116,21 @@ class PotterBooksCalculatorTest {
         arguments(Arrays.asList(2, 1, 3, 4, 5, 1), BOOK_PRICE * 6 * 0.75), // (順序が異なっても結果は同じはず)
         arguments(Arrays.asList(3, 3, 3, 1, 1, 1, 3), BOOK_PRICE * 7 * 0.75)
       );
+    }
+  }
+  
+  @Nested
+  @DisplayName("パターン3：購入できない場合のテスト")
+  class NotPurchaseBooksTest {
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("booksがnullまたは空の場合は購入できない")
+    void booksNullOrEmptyTest(List<Integer> books) {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            calculator.calculateTotalPrice(books);
+        });
+        assertThat(exception.getMessage(), is("カートに何も入っていません。"));
     }
   }
 }
