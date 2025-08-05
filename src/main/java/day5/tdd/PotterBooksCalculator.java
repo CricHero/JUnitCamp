@@ -14,7 +14,9 @@ public class PotterBooksCalculator {
    * @return 計算された合計金額
    */
   public double calculateTotalPrice(List<Integer> books) {
-    // TDDのサイクルでここにコードを追加していきます
+	if (books.size() == 1) {
+	  return BOOK_PRICE;
+	}
     return 0.0; // とりあえず0を返すようにしておく
   }
 }
