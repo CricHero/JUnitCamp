@@ -1,7 +1,15 @@
 package day5.tdd;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.*;
+
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 // ★最終的なゴール
 // 以下の仕様を満たすテストを書いてTDDでPotterBooksCalculator#calculateTotalPriceを実装してください。
@@ -33,6 +41,18 @@ class PotterBooksCalculatorTest {
     calculator = new PotterBooksCalculator();
   }
 
-  // ここにテストコードをRed-Green-Refactorサイクルで追加していきます
+  @Nested
+  @DisplayName("パターン1：同一巻だけを購入した場合のテスト")
+  class PurchaseSameBooksTest {
+
+    @DisplayName("1冊だけ購入したら8ユーロ")
+    @ParameterizedTest(name = "ケース{index} {0}巻を1冊だけ購入したら8ユーロになること")
+    @ValueSource(ints = {1, 2, 3, 4, 5})
+    void purchaseOnlyOneBooktest(int volume) {
+      List<Integer> books = List.of(volume);
+      double actual = calculator.calculateTotalPrice(books);
+      assertThat(actual, is(BOOK_PRICE));
+    }
+  }
 
 }
