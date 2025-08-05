@@ -1,0 +1,20 @@
+package day5.tdd;
+
+import java.util.List;
+
+public class PotterBooksCalculator {
+  // 基本的な書籍の価格（1冊あたり）
+  private static final double BOOK_PRICE = 8.0;
+
+  /**
+   * 購入するハリー・ポッターの書籍リストに基づいて合計金額を計算する。 <br>
+   * リストには書籍の巻数（1, 2, 3, 4, 5）が含まれる。<br>
+   *
+   * @param books 購入する書籍の巻数リスト (例: [1, 2, 1])
+   * @return 計算された合計金額
+   */
+  public double calculateTotalPrice(List<Integer> books) {
+    // TDDのサイクルでここにコードを追加していきます
+    return 0.0; // とりあえず0を返すようにしておく
+  }
+}
