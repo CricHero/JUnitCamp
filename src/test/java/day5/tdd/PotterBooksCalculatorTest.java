@@ -61,7 +61,7 @@ class PotterBooksCalculatorTest {
       assertThat(actual, is(BOOK_PRICE));
     }
     
-    @DisplayName("複数冊を同一巻で購入した場合のテスト")
+    @DisplayName("複数冊を同一巻で購入した場合割引されない")
     @ParameterizedTest(name = "ケース{index} {0}巻を{1}冊購入したら{2}ユーロになること")
     @CsvSource({
         "1, 2, 16.0",
