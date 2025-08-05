@@ -4,12 +4,10 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.*;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -62,24 +60,20 @@ class PotterBooksCalculatorTest {
       double actual = calculator.calculateTotalPrice(books);
       assertThat(actual, is(BOOK_PRICE));
     }
-    
+
     @DisplayName("複数冊を同一巻で購入した場合割引されない")
     @ParameterizedTest(name = "ケース{index} {0}巻を{1}冊購入したら{2}ユーロになること")
-    @CsvSource({
-        "1, 2, 16.0",
-        "2, 3, 24.0",
-        "5, 4, 32.0"
-    })
+    @CsvSource({"1, 2, 16.0", "2, 3, 24.0", "5, 4, 32.0"})
     void purchaseMultipleSameBooksTest(int volume, int quantity, double expectedPrice) {
-        List<Integer> books = new ArrayList<>();
-        for (int i = 0; i < quantity; i++) {
-            books.add(volume);
-        }
-        double actual = calculator.calculateTotalPrice(books);
-        assertThat(actual, is(expectedPrice));
+      List<Integer> books = new ArrayList<>();
+      for (int i = 0; i < quantity; i++) {
+        books.add(volume);
+      }
+      double actual = calculator.calculateTotalPrice(books);
+      assertThat(actual, is(expectedPrice));
     }
   }
-  
+
   @Nested
   @DisplayName("パターン2：異なる巻を購入した場合のテスト")
   class PurchaseDifferentBooksTest {
@@ -94,31 +88,30 @@ class PotterBooksCalculatorTest {
 
     static Stream<Arguments> differenBooksProvider() {
       return Stream.of(
-    	// 異なる巻2冊 (5%オフ)
-        arguments(Arrays.asList(1, 2), BOOK_PRICE * 2 * 0.95),
-        arguments(Arrays.asList(2, 1), BOOK_PRICE * 2 * 0.95), // (順序が異なっても結果は同じはず)
-        arguments(Arrays.asList(3, 5), BOOK_PRICE * 2 * 0.95),
-        // 異なる巻3冊 (10%オフ)
-        arguments(Arrays.asList(1, 2, 3), BOOK_PRICE * 3 * 0.90),
-        arguments(Arrays.asList(2, 1, 3), BOOK_PRICE * 3 * 0.90), // (順序が異なっても結果は同じはず)
-        arguments(Arrays.asList(3, 5, 4), BOOK_PRICE * 3 * 0.90),
-        arguments(Arrays.asList(3, 3, 5), BOOK_PRICE * 3 * 0.90),
-        // 異なる巻4冊 (20%オフ)
-        arguments(Arrays.asList(1, 2, 3, 4), BOOK_PRICE * 4 * 0.80),
-        arguments(Arrays.asList(2, 1, 3, 4), BOOK_PRICE * 4 * 0.80), // (順序が異なっても結果は同じはず)
-        arguments(Arrays.asList(3, 3, 3, 1), BOOK_PRICE * 4 * 0.80),
-        // 異なる巻5冊 (25%オフ)
-        arguments(Arrays.asList(1, 2, 3, 4, 5), BOOK_PRICE * 5 * 0.75),
-        arguments(Arrays.asList(2, 1, 3, 4, 5), BOOK_PRICE * 5 * 0.75), // (順序が異なっても結果は同じはず)
-        arguments(Arrays.asList(3, 3, 3, 1, 1), BOOK_PRICE * 5 * 0.75),
-        // 異なる巻6冊以上 (25%オフ)
-        arguments(Arrays.asList(1, 2, 3, 4, 5 ,1), BOOK_PRICE * 6 * 0.75),
-        arguments(Arrays.asList(2, 1, 3, 4, 5, 1), BOOK_PRICE * 6 * 0.75), // (順序が異なっても結果は同じはず)
-        arguments(Arrays.asList(3, 3, 3, 1, 1, 1, 3), BOOK_PRICE * 7 * 0.75)
-      );
+          // 異なる巻2冊 (5%オフ)
+          arguments(Arrays.asList(1, 2), BOOK_PRICE * 2 * 0.95),
+          arguments(Arrays.asList(2, 1), BOOK_PRICE * 2 * 0.95), // (順序が異なっても結果は同じはず)
+          arguments(Arrays.asList(3, 5), BOOK_PRICE * 2 * 0.95),
+          // 異なる巻3冊 (10%オフ)
+          arguments(Arrays.asList(1, 2, 3), BOOK_PRICE * 3 * 0.90),
+          arguments(Arrays.asList(2, 1, 3), BOOK_PRICE * 3 * 0.90), // (順序が異なっても結果は同じはず)
+          arguments(Arrays.asList(3, 5, 4), BOOK_PRICE * 3 * 0.90),
+          arguments(Arrays.asList(3, 3, 5), BOOK_PRICE * 3 * 0.90),
+          // 異なる巻4冊 (20%オフ)
+          arguments(Arrays.asList(1, 2, 3, 4), BOOK_PRICE * 4 * 0.80),
+          arguments(Arrays.asList(2, 1, 3, 4), BOOK_PRICE * 4 * 0.80), // (順序が異なっても結果は同じはず)
+          arguments(Arrays.asList(3, 3, 3, 1), BOOK_PRICE * 4 * 0.80),
+          // 異なる巻5冊 (25%オフ)
+          arguments(Arrays.asList(1, 2, 3, 4, 5), BOOK_PRICE * 5 * 0.75),
+          arguments(Arrays.asList(2, 1, 3, 4, 5), BOOK_PRICE * 5 * 0.75), // (順序が異なっても結果は同じはず)
+          arguments(Arrays.asList(3, 3, 3, 1, 1), BOOK_PRICE * 5 * 0.75),
+          // 異なる巻6冊以上 (25%オフ)
+          arguments(Arrays.asList(1, 2, 3, 4, 5, 1), BOOK_PRICE * 6 * 0.75),
+          arguments(Arrays.asList(2, 1, 3, 4, 5, 1), BOOK_PRICE * 6 * 0.75), // (順序が異なっても結果は同じはず)
+          arguments(Arrays.asList(3, 3, 3, 1, 1, 1, 3), BOOK_PRICE * 7 * 0.75));
     }
   }
-  
+
   @Nested
   @DisplayName("パターン3：購入できない場合のテスト")
   class NotPurchaseBooksTest {
@@ -127,10 +120,10 @@ class PotterBooksCalculatorTest {
     @NullAndEmptySource
     @DisplayName("booksがnullまたは空の場合は購入できない")
     void booksNullOrEmptyTest(List<Integer> books) {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            calculator.calculateTotalPrice(books);
-        });
-        assertThat(exception.getMessage(), is("カートに何も入っていません。"));
+      Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+        calculator.calculateTotalPrice(books);
+      });
+      assertThat(exception.getMessage(), is("カートに何も入っていません。"));
     }
   }
 }
