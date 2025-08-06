@@ -98,3 +98,14 @@ test配下にある各テストクラスに課題の具体的な内容を記載�
 
 
 ※DB接続テストについても本当は作成したかったのですが、、、誰か作ってください。。
+
+# 参考文献
+本教材は以下の情報を参考にして作成しました。
+- [【JUnit入門】テストの基本から実践まで理解しよう！](https://be-engineer.jp/programming/java/972/)
+- [Java環境構築(Windows版)Eclipseのインストール](https://www.techfun.co.jp/services/magazine/java/windows-eclipse-install.html)
+- [Gitのインストール方法(Windows版)](https://qiita.com/takeru-hirai/items/4fbe6593d42f9a844b1c)
+- [Cyber-Dojo で Fizz Buzz の次におすすめするエクササイズ5選](https://kakakakakku.hatenablog.com/entry/2024/01/19/210158)
+- [cyber‑dojo](https://cyber-dojo.org/creator/home)
+- [JUnitの基本的な注釈とアサーションメソッド一覧](https://qiita.com/HarukiFujita/items/724c684fa80788810531)
+- [JUnitで外部ライブラリを使用せずテストダブルを実装する](https://qiita.com/maple_syrup/items/545b890268315e273227)
+- [JUnit 5 のパラメーター化テストは超便利](https://qiita.com/oohira/items/5030182af29a30166868)
